@@ -1,0 +1,34 @@
+
+<div class="row">
+  
+  <div class="col m6 s12">
+    {{#each devouredBurgers }}
+    <div class="card">
+      <h2>{{name}}</h2>
+      <p>{{devoured}}</p>
+    </div>
+    {{/each}}
+  </div>
+
+  <div class="col m6 s12">
+    {{#each undevouredBurgers}}
+    <div class="card">
+      <h4>{{name}}</h4>
+      <p>{{devoured}}</p>
+    </div>
+    {{/each}}
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col s8 offset-s2">
+
+    <form class="center-align" action="/burgers" method="POST">
+      <input id="burger-name" name="burger-name" type="text" placeholder="What burger have you been dying to try?">
+      <button class="btn waves-effect red" type="submit">Submit</button>
+    </form>
+
+  </div>
+</div>
+
