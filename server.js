@@ -7,6 +7,9 @@ const burgerController = require('./burger/controllers/burgers-controller');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.engine("handlebars", handlebars({ 
     defaultLayout: "main",
     layoutsDir: path.join('burger/views/layouts')

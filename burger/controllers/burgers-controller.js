@@ -1,5 +1,7 @@
 const express = require('express');
 const async = require('async');
+const fs = require('fs');
+const path = require('path');
 const burger = require('./../models/burger');
 
 const router = express.Router();
@@ -28,14 +30,19 @@ router.get('/burgers', (req, res) => {
     
 });
 
-router.post('/burgers', (req, res) => {
-    console.log(req.body);
-    res.redirect('/burgers');
+router.put('/burgers/:id', (req, res) => {
+    console.log(req.params);
+    console.log(req.query);
+    burger.updateBurger(parseInt(req.params.id), req.query, (results) => {
+        res.json(results);
+    });
 });
 
-const BurgerController = function BurgerController(burgerView, burgerModel) {
-    this.burgerView = burgerView;
-    this.burgerModel = burgerModel;
-}
+router.post('/burgers', (req, res) => {
+    console.log(req.body);
+    burger.addBurger(req.body.name, (results) => {
+        res.json(results);
+    });
+});
 
 module.exports = router;

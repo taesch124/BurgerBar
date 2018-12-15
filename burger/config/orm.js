@@ -47,7 +47,7 @@ function updateDevoured(id, callback) {
     WHERE id = ${id}`;
     connection.query(query, (err, results) => {
         if (err) throw err;
-
+        
         if(callback) callback(results);
     });
 }
@@ -55,5 +55,6 @@ function updateDevoured(id, callback) {
 module.exports = {
     getAllBurgers: getAllBurgers,
     getBurgersByDevoured: getBurgersByDevoured,
-    addBurger: addBurger
+    addBurger: addBurger,
+    updateDevoured
 }

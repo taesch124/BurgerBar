@@ -21,7 +21,13 @@ function addBurger(name, callback) {
     });
 }
 
+function updateBurger(id, update, callback) {
+    orm.updateDevoured(id, callback);
+}
+
 module.exports = {
     getDevouredBurgers: getDevouredBurgers,
-    getUndevouredBurgers: getUndevouredBurgers
+    getUndevouredBurgers: getUndevouredBurgers,
+    addBurger: addBurger,
+    updateBurger: updateBurger
 }
