@@ -1,60 +1,36 @@
 const connection = require('./connection');
 
-function getAllBurgers(callback) {
-    let query = `SELECT id,
-    name,
-    devoured
-    FROM burgers
-    ORDER BY id;`;
-    connection.query(query, (err, results) => {
-        if(err) throw err;
+function selectFromWhere(table, col, where, callback) {
+    let queryString = "SELECT * FROM ?? WHERE ?? = ?";
 
-        if(callback) callback(results);
+    connection.query(queryString, [table, col, where], function(err, results) {
+      if (err) throw err;
+      if(typeof callback === 'function') callback(results);
     });
 }
 
-function getBurgersByDevoured(devoured, callback) {
-    let query = `SELECT id,
-    name,
-    devoured
-    FROM burgers
-    WHERE devoured = ?
-    ORDER BY id;`;
-    let where = devoured
-    connection.query(query, where, (err, results) => {
-        if(err) throw err;
+function insertObject(table, insert, callback) {
+    let queryString = 'INSERT INTO ?? SET ?';
 
-        if(callback) callback(results);
-    });
-}
-
-function addBurger(name, callback) {
-    let query = `INSERT INTO burgers SET ?`;
-    let insert = {
-        name: name,
-        devoured: false
-    };
-    connection.query(query, insert, (err, results) => {
-        if(err) throw err;
-
-        if(callback) callback(results);
-    });
-}
-
-function updateDevoured(id, callback) {
-    let query = `UPDATE burgers
-    SET devoured = true
-    WHERE id = ${id}`;
-    connection.query(query, (err, results) => {
+    connection.query(queryString, [table, insert], (err, results) => {
         if (err) throw err;
-        
-        if(callback) callback(results);
+
+        if(typeof callback === 'function') callback(results);
+    });
+}
+
+function updateTable(table, update, where, callback) {
+    let queryString = 'UPDATE ?? SET ? WHERE ?';
+
+    connection.query(queryString, [table, update, where], (err, results) => {
+        if(err) throw err;
+
+        if(typeof callback === 'function') callback(results);
     });
 }
 
 module.exports = {
-    getAllBurgers: getAllBurgers,
-    getBurgersByDevoured: getBurgersByDevoured,
-    addBurger: addBurger,
-    updateDevoured
+    selectFromWhere: selectFromWhere,
+    insertObject: insertObject,
+    updateTable: updateTable
 }

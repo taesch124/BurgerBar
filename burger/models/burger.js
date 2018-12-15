@@ -1,28 +1,29 @@
 const orm = require('./../config/orm');
 
 function getDevouredBurgers(callback) {
-    orm.getBurgersByDevoured(true, (results) => {
+    orm.selectFromWhere('burgers', 'devoured', true, (results) => {
         results.map(e => e.devoured ? e.devoured = true : e.devoured = false);
-        callback(results);
+        if(typeof callback === 'function') callback(results);
     });
 }
 
 function getUndevouredBurgers(callback) {
-    orm.getBurgersByDevoured(false, (results) => {
+    orm.selectFromWhere('burgers', 'devoured', false, (results) => {
         results.map(e => e.devoured ? e.devoured = true : e.devoured = false);
-        callback(results);
+        if(typeof callback === 'function') callback(results);
     });
 }
 
 function addBurger(name, callback) {
-    orm.addBurger(name, (results) => {
-        console.log(results);
-        callback(results);
-    });
+    let burger = {
+        name: name
+    }
+    orm.insertObject('burgers', burger, callback);
 }
 
 function updateBurger(id, update, callback) {
-    orm.updateDevoured(id, callback);
+    update.devoured ? update.devoured = 1 : update.devoured = 0;
+    orm.updateTable('burgers', update, {id: id}, callback);
 }
 
 module.exports = {

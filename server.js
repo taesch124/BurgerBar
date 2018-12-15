@@ -16,7 +16,7 @@ app.engine("handlebars", handlebars({
 }));
 
 app.set("view engine", "handlebars");
-app.set('views', path.join(__dirname, 'burger/views'));
+app.set('views', path.join(__dirname, 'burger', 'views'));
 
 app.use('/', burgerController);
 

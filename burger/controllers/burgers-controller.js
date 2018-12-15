@@ -6,6 +6,10 @@ const burger = require('./../models/burger');
 
 const router = express.Router();
 
+router.get('/', (req, res) => {
+    res.redirect('/burgers');
+});
+
 router.get('/burgers', (req, res) => {
     let response = {};
     async.parallel({
@@ -31,15 +35,14 @@ router.get('/burgers', (req, res) => {
 });
 
 router.put('/burgers/:id', (req, res) => {
-    console.log(req.params);
-    console.log(req.query);
-    burger.updateBurger(parseInt(req.params.id), req.query, (results) => {
+    let id = req.params.id;
+    let update = req.query;
+    burger.updateBurger(id, update, (results) => {
         res.json(results);
     });
 });
 
 router.post('/burgers', (req, res) => {
-    console.log(req.body);
     burger.addBurger(req.body.name, (results) => {
         res.json(results);
     });
