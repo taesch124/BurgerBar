@@ -26,9 +26,15 @@ function updateBurger(id, update, callback) {
     orm.updateTable('burgers', update, {id: id}, callback);
 }
 
+function deleteBurger(id, callback) {
+    let where = {id: id};
+    orm.deleteFromWhere('burgers', where, callback);
+}
+
 module.exports = {
     getDevouredBurgers: getDevouredBurgers,
     getUndevouredBurgers: getUndevouredBurgers,
     addBurger: addBurger,
-    updateBurger: updateBurger
+    updateBurger: updateBurger,
+    deleteBurger: deleteBurger
 }

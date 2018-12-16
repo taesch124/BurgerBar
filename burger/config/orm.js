@@ -29,8 +29,18 @@ function updateTable(table, update, where, callback) {
     });
 }
 
+function deleteFromWhere(table, where, callback) {
+    let queryString = 'DELETE FROM ?? WHERE ?';
+
+    connection.query(queryString, [table, where], (err, results) => {
+        if (err) throw err;
+        if(typeof callback === 'function') callback(results);
+    });
+}
+
 module.exports = {
     selectFromWhere: selectFromWhere,
     insertObject: insertObject,
-    updateTable: updateTable
+    updateTable: updateTable,
+    deleteFromWhere: deleteFromWhere
 }

@@ -3,4 +3,6 @@ INSERT INTO burgers (name, devoured)
 VALUES ('Monterey Western', false),
 ('Black and Bleu', false),
 ('Jalapeno Joy', false),
-('Breakfast Burger', true);
+('French Dip Burger', false),
+('Breakfast Burger', true),
+('Honey BBQ Burger', true);

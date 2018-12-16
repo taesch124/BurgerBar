@@ -2,24 +2,38 @@
 <div class="row">
   
   <div class="col m6 s12">
+    <h3>I want to try...</h3>
     {{#each undevouredBurgers }}
     <div class="card">
-      <div class="row">
-        <div class="col s12">
+
+      <div class="row flex">
+        <div class="col m8 s10">
           <h4><strong>{{name}}</strong></h4>
-          <p>{{devoured}}</p>
-          <a class="eat-it waves-effect waves-light btn-small" data-id="{{{id}}}"><i class="material-icons right">arrow_forward</i>Tried it</a>
+        </div>
+        <div class="col m4 s2 center-align flex">
+          <a class="eat-it waves-effect waves-light btn-small valign-wrapper red" data-id="{{{id}}}"><i class="material-icons right">arrow_forward</i>Tried it</a>
         </div>
       </div>
+
     </div>
     {{/each}}
   </div>
 
   <div class="col m6 s12">
+    <h3>Already tried</h3>
     {{#each devouredBurgers}}
     <div class="card">
-      <h5>{{name}}</h5>
-      <p>{{devoured}}</p>
+      
+      <div class="row flex">
+        <div class="col s8">
+          <h5>{{name}}</h5>
+        </div>
+        <div class="col s4 center-align flex">
+          <a class="delete-it waves-effect waves-red btn-flat" data-id="{{{id}}}"><i class="material-icons icon-grey">delete</i></a>
+        </div>
+      </div>
+      
+      
     </div>
     {{/each}}
   </div>
@@ -27,51 +41,13 @@
 </div>
 
 <div class="row">
-  <div class="col s8 offset-s2">
+  <div class="col m8 s10 offset-s1 offset-m2">
 
     <form id="new-burger" class="center-align">
       <input id="burger-name" name="burger-name" type="text" placeholder="What burger have you been dying to try?">
+      <p id="name-validation" class="validation-text helper-text hidden"></p>
       <button  class="btn waves-effect red">Submit</button>
     </form>
 
   </div>
 </div>
-
-<script>
-  $('document').ready(() => { 
-
-    $('.eat-it').on('click', function()  {
-      let id = parseInt($(this).data('id'));
-      $.ajax({
-          url: '/burgers/' + id + '?devoured=true',
-          type: 'PUT',
-          data: id
-        }).then((data) => {
-          console.log('done');
-          location.reload();
-        });
-    });
-
-    $('#new-burger').on('submit', function() {
-      event.preventDefault();
-
-      let burger = {
-        name: $('#burger-name').val().trim()
-      };
-
-      if(!burger.name) {
-        console.log('No name.');
-        return;
-      }
-
-      $.ajax({
-          url: '/burgers',
-          type: 'POST',
-          data: burger
-        }).then((data) => {
-          location.reload();
-        });
-    });
-
-  });
-</script>

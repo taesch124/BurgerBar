@@ -42,6 +42,13 @@ router.put('/burgers/:id', (req, res) => {
     });
 });
 
+router.delete('/burgers/:id', (req, res) => {
+    let id = req.params.id;
+    burger.deleteBurger(id, results => {
+        res.json(results);
+    });
+})
+
 router.post('/burgers', (req, res) => {
     burger.addBurger(req.body.name, (results) => {
         res.json(results);

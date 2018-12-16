@@ -1,0 +1,45 @@
+h1, h3 {
+    font-family: 'Staatliches', cursive;
+}
+
+h4, h5 {
+    font-family: 'Roboto Slab', serif;
+}
+
+h4 {
+    font-weight: 700;
+}
+
+h5 {
+    color: rgb(146, 146, 146);
+    padding: 1rem 0;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    padding: 0 .5rem 0 1rem;
+}
+
+.btn-small,
+.btn-flat {
+    align-self: center;
+    margin: 0 auto;
+}
+
+.btn-small {
+    padding-right: 10px;
+}
+
+.helper-text {
+    font-size: .8rem;
+    margin-top: .2rem;
+    color: red;
+}
+
+i.icon-grey {
+    color: rgb(146, 146, 146);
+}
